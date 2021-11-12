@@ -1,0 +1,120 @@
+openapi: 3.0.3
+servers:
+    - url: /ui/v1
+info:
+  version: "1.0.0"
+  title: Frontend API
+tags:
+  - name: ui
+    description: item queries and dictionaries management
+
+paths:
+  /item:
+    get:
+      summary: get filtered items
+      operationId: getItems
+      responses:
+        200:
+          description: list of items (filtered)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemList"
+
+  /item/{itemId}:
+    get:
+      summary: get item by id
+      operationId: getItemById
+      parameters:
+          - $ref: "#/components/parameters/itemId"
+      responses:
+        200:
+          description: the item
+          content:
+            application/json:
+              schema:
+                $ref: "EventList.yml#/definitions/Item"
+  /item/{itemId}/events:
+    get:
+      summary: get all item's events
+      operationId: getItemEvents
+      parameters:
+        - $ref: "#/components/parameters/itemId"
+      responses:
+        200:
+          description: item's events
+          content:
+            application/json:
+              schema:
+                $ref: "EventList.yml"
+  /location:
+    get:
+      summary: get all locations
+      operationId: getLocations
+      responses:
+        200:
+          description: list of locations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationList"
+  /location/{locationId}:
+    get:
+      summary: get location
+      operationId: getLocationById
+      parameters:
+          - $ref: "#/components/parameters/locationId"
+      responses:
+        200:
+          description: list of locations
+          content:
+            application/json:
+              schema:
+                $ref: "Location.yml"
+  /country:
+    get:
+      summary: get all countries
+      operationId: getCountries
+      responses:
+        200:
+          description: list of countries
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryList"
+
+components:
+  schemas:
+    ItemList:
+      description: list of itmes
+      type: array
+      items: {
+        $ref: "EventList.yml#/definitions/Item"
+      }
+    LocationList:
+      description: list of locations
+      type: array
+      items: {
+        $ref: "Location.yml"
+      }
+    CountryList:
+      description: list of countries
+      type: array
+      items: {
+        $ref: "Location.yml#/definitions/Country"
+      }
+  parameters:
+    itemId:
+      name: itemId
+      description: item UUID
+      in: path
+      required: true
+      schema:
+        $ref: "EventList.yml#/definitions/Id"
+    locationId:
+      name: locationId
+      description: location Id
+      in: path
+      required: true
+      schema:
+        type: string

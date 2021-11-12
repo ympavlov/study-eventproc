@@ -1,0 +1,88 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+description: list of events
+type: array
+items:
+  $ref: "#/definitions/Event"
+
+definitions:
+  Id:
+    description: common Id type
+    type: string
+    format: uuid
+  Item:
+    description: item
+    type: object
+    required: [id, level, created, updated, state, currentLocation]
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+        description: item Id
+      parentId:
+        $ref: "#/definitions/Id"
+      level:
+        type: integer
+        format: int32
+        description: item level
+        enum: [0, 1, 2, 3]
+      created:
+        type: string
+        format: date
+        description: date&time of creation
+      updated:
+        type: string
+        format: date
+        description: date&time of last update
+      state:
+        type: string
+        description: item state
+        enum:
+          - created
+          - deleted
+      currentLocation:
+        type: string
+        description: location name
+  Event:
+    description: message of events to process
+    type: object
+    required: [id, level, eventTime, action, step]
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+        description: item Id
+      level:
+        type: integer
+        format: int32
+        description: item level
+        enum: [0, 1, 2, 3]
+      eventTime:
+        type: string
+        format: date
+        description: event time
+      action:
+        type: string
+        description: event action type
+        enum:
+          - create
+          - observe
+          - delete
+      step:
+        type: string
+        description: business step
+        enum:
+          - packing
+          - shipping
+          - invoicing
+          - payment
+          - ordering
+      locationId:
+        type: string
+        description: location name
+      sendingSystem:
+        type: string
+        description: sending system name
+      parentId:
+        $ref: "#/definitions/Id"
+      content:
+        type: array
+        items:
+          $ref: "#/definitions/Id"

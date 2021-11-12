@@ -1,0 +1,26 @@
+openapi: 3.0.3
+servers:
+  - url: /upload/v1
+info:
+  version: "1.0.0"
+  title: Event uploading API
+
+paths:
+  /:
+    post:
+      summary: upload events
+      operationId: uploadEvents
+      requestBody:
+        $ref: "#/components/requestBodies/EventList"
+      responses:
+        200:
+          description: the list of events is accepted, willing to be processed
+
+components:
+  requestBodies:
+    EventList:
+      content:
+        application/json:
+          schema:
+            $ref: "EventList.yml"
+

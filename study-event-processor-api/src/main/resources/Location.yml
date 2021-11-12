@@ -1,0 +1,42 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+description: facility location
+type: object
+required:
+  - name
+  - country
+properties:
+  id:
+    type: string
+    description: location global Id
+  country:
+    type: string
+    $ref: "#/definitions/CountryCode2"
+    description: location country
+  name:
+    type: string
+    description: location name
+  address:
+    type: string
+    description: location address
+    $ref: "#/definitions/Country"
+
+definitions:
+  CountryCode2:
+    type: string
+    minLength: 2
+    maxLength: 2
+    description: 2-letters code
+  Country:
+    description: countries
+    type: object
+    required:
+      - code2
+      - name
+    properties:
+      2code:
+        type: string
+        $ref: "#/definitions/CountryCode2"
+        description: unique code
+      name:
+        type: string
+        description: country name
