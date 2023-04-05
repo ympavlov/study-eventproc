@@ -1,12 +1,2 @@
 *.iml
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-/.idea/gradle.xml
-/.idea/misc.xml
-/.idea/jarRepositories.xml
-.DS_Store
 target

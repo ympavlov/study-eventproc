@@ -1,12 +1,12 @@
 openapi: 3.0.3
 servers:
-    - url: /ui/v1
+  - url: /ui/v1
 info:
   version: "1.0.0"
   title: Frontend API
+  description: Item queries and dictionaries management
 tags:
   - name: ui
-    description: item queries and dictionaries management
 
 paths:
   /item:

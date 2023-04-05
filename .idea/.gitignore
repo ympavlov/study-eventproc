@@ -1,2 +1,10 @@
-# Default ignored files
+/caches
+/libraries
+/shelf
+/modules.xml
 /workspace.xml
+/navEditor.xml
+/assetWizardSettings.xml
+/gradle.xml
+/misc.xml
+/jarRepositories.xml

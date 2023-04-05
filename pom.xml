@@ -1,14 +1,149 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.ympavlov.study.eventproc</groupId>
-	<artifactId>study-event-processor</artifactId>
+	<artifactId>study-eventproc</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<modules>
-		<module>study-event-processor-api</module>
-	</modules>
 
+	<modules>
+		<!--module>study-eventproc-openapi</module-->
+		<module>study-eventproc-upload-fe</module>
+    <module>study-eventproc-store-service</module>
+    <module>study-eventproc-dict-fe</module>
+  </modules>
+
+	<properties>
+    <!-- as in generated pom.xml -->
+		<springboot.version>2.7.6</springboot.version>
+		<springdoc.version>1.6.14</springdoc.version>
+		<swagger.version>2.2.7</swagger.version>
+		<jackson.version>2.14.2</jackson.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+      <dependency>
+        <groupId>io.swagger.core.v3</groupId>
+        <artifactId>swagger-annotations</artifactId>
+        <version>${swagger.version}</version>
+      </dependency>
+			<dependency>
+				<groupId>io.swagger.core.v3</groupId>
+				<artifactId>swagger-models</artifactId>
+				<version>${swagger.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-ui</artifactId>
+				<version>${springdoc.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openapitools</groupId>
+				<artifactId>jackson-databind-nullable</artifactId>
+				<version>0.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-jsr310</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<encoding>windows-1252</encoding>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<configuration>
+						<encoding>windows-1252</encoding>
+					</configuration>
+				</plugin>
+
+        <plugin>
+          <groupId>org.openapitools</groupId>
+          <artifactId>openapi-generator-maven-plugin</artifactId>
+          <version>6.5.0</version>
+
+          <configuration>
+            <generatorName>spring</generatorName>
+
+            <!--suppress UnresolvedMavenProperty - defined in submodules -->
+            <modelPackage>${mainPackage}.model</modelPackage>
+            <!--suppress UnresolvedMavenProperty - defined in submodules -->
+            <apiPackage>${mainPackage}.api</apiPackage>
+            <withXml>true</withXml>
+
+            <configOptions>
+              <enablePostProcessFile>false</enablePostProcessFile>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${project.artifactId}</artifactId>
+              <artifactVersion>${project.version}</artifactVersion>
+              <!--suppress UnresolvedMavenProperty - defined in submodules -->
+              <basePackage>${mainPackage}</basePackage>
+              <!--suppress UnresolvedMavenProperty - defined in submodules -->
+              <configPackage>${mainPackage}.config</configPackage>
+
+              <delegatePattern>true</delegatePattern>
+
+              <generateSupportingFiles>false</generateSupportingFiles>
+              <apiTests>false</apiTests>
+              <modelTests>true</modelTests>
+              <interfaceOnly>false</interfaceOnly>
+            </configOptions>
+          </configuration>
+	        <executions>
+		        <execution>
+			        <id>generate-api</id>
+			        <goals>
+				        <goal>generate</goal>
+			        </goals>
+			        <configuration>
+				        <inputSpec>${apiSpec}</inputSpec>
+			        </configuration>
+		        </execution>
+	        </executions>
+        </plugin>
+
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${springboot.version}</version>
+					<executions>
+						<execution>
+							<id>build-exec-jar</id>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+							<phase>package</phase>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

@@ -6,8 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="study-event-processor-api" />
+        <module name="study-eventproc-dict-service" />
+        <module name="study-eventproc-event-service" />
+        <module name="study-eventproc-upload-fe" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="study-event-processor-api" target="1.8" />
+      <module name="study-event-store-service" target="1.8" />
+      <module name="study-event-upload-fe" target="1.8" />
+      <module name="study-eventproc-openapi" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
