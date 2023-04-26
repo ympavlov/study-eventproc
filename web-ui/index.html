@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+
+  <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs@0.5.7/themes/vue-tabs.css">
+  <script src="https://unpkg.com/vue-nav-tabs@0.5.7/dist/vue-tabs.min.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/vue-good-table@2.21.11/dist/vue-good-table.min.css">
+  <script src="https://unpkg.com/vue-good-table@2.21.11/dist/vue-good-table.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <vue-tabs>
+    <v-tab title="Items">
+      <vue-good-table
+          :columns="columns"
+          :rows="rows"/>
+    </v-tab>
+    <vue-tabs>
+      <v-tab title="Last events">
+        <vue-good-table
+            :columns="columns"
+            :rows="rows"/>
+      </v-tab>
+    </vue-tabs>
+  </vue-tabs>
+</div>
+<script>
+      columns = [
+        {
+          label: 'Name',
+          field: 'name',
+        },
+        {
+          label: 'Age',
+          field: 'age',
+          type: 'number',
+        },
+        {
+          label: 'Created On',
+          field: 'createdAt',
+          type: 'date',
+          dateInputFormat: 'yyyy-MM-dd',
+          dateOutputFormat: 'MMM do yy',
+        },
+        {
+          label: 'Percent',
+          field: 'score',
+          type: 'percentage',
+        }
+      ];
+      rows= [
+        { id:1, name:"John", age: 20, createdAt: '',score: 0.03343 },
+        { id:2, name:"Jane", age: 24, createdAt: '2011-10-31', score: 0.03343 },
+        { id:3, name:"Susan", age: 16, createdAt: '2011-10-30', score: 0.03343 },
+        { id:4, name:"Chris", age: 55, createdAt: '2011-10-11', score: 0.03343 },
+        { id:5, name:"Dan", age: 40, createdAt: '2011-10-21', score: 0.03343 },
+        { id:6, name:"John", age: 20, createdAt: '2011-10-31', score: 0.03343 },
+      ];
+
+		var app = new Vue({
+		  el: '#app',
+		  data: {
+		    message: 'Hello, Vue!'
+		  }
+		})
+
+</script>
+</body>
+</html>

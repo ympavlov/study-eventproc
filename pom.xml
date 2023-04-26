@@ -11,9 +11,10 @@
 	<modules>
 		<!--module>study-eventproc-openapi</module-->
 		<module>study-eventproc-upload-fe</module>
-    <module>study-eventproc-store-service</module>
-    <module>study-eventproc-dict-fe</module>
-  </modules>
+    <module>study-eventproc-event-service</module>
+    <module>study-eventproc-dict-service</module>
+		<module>support/openapi-server-support</module>
+	</modules>
 
 	<properties>
     <!-- as in generated pom.xml -->
@@ -25,6 +26,7 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- external -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
@@ -61,6 +63,14 @@
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
+			</dependency>
+
+			<!-- internal -->
+			<dependency>
+				<artifactId>openapi-server-support</artifactId>
+				<groupId>com.github.ympavlov.study.eventproc</groupId>
+				<version>${project.version}</version>
+				<type>pom</type>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -123,6 +133,7 @@
 				        <goal>generate</goal>
 			        </goals>
 			        <configuration>
+				        <!--suppress UnresolvedMavenProperty -->
 				        <inputSpec>${apiSpec}</inputSpec>
 			        </configuration>
 		        </execution>
