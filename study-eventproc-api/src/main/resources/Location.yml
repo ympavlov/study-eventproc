@@ -3,7 +3,6 @@ description: facility location
 type: object
 required:
   - name
-  - country
 properties:
   id:
     type: string

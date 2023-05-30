@@ -1,0 +1,32 @@
+openapi: 3.0.3
+servers:
+  - url: /v1
+info:
+  version: "1.0.0"
+  title: Event uploading API
+
+paths:
+  /item/{itemId}/events:
+    get:
+      summary: get all item's events
+      operationId: getItemEvents
+      parameters:
+        - $ref: "#/components/parameters/itemId"
+      responses:
+        200:
+          description: item's events
+          content:
+            application/json:
+              schema:
+                $ref: "EventList.yml"
+
+components:
+  parameters:
+    itemId:
+      name: itemId
+      description: item UUID
+      in: path
+      required: true
+      schema:
+        $ref: "EventList.yml#/definitions/Id"
+

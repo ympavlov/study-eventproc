@@ -44,7 +44,7 @@ definitions:
   Event:
     description: message of events to process
     type: object
-    required: [id, level, eventTime, action, step]
+    required: [id, level, eventTime, action, step, locationId]
     properties:
       id:
         $ref: "#/definitions/Id"

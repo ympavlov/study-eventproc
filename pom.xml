@@ -8,19 +8,26 @@
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
 
+	<scm>
+		<connection>scm:git:git://github.com/ympavlov/study-eventproc</connection>
+		<url>https://github.com/ympavlov/study-eventproc/</url>
+	</scm>
+
 	<modules>
 		<!--module>study-eventproc-openapi</module-->
-		<module>study-eventproc-upload-fe</module>
-    <module>study-eventproc-event-service</module>
-    <module>study-eventproc-dict-service</module>
+		<module>study-eventproc-gateway</module>
+		<module>study-eventproc-event-service</module>
+		<module>study-eventproc-dict-service</module>
 		<module>support/openapi-server-support</module>
+		<module>support/spring-data-support</module>
 	</modules>
 
 	<properties>
-    <!-- as in generated pom.xml -->
-		<springboot.version>2.7.6</springboot.version>
+		<!-- as in generated pom.xml -->
+		<springboot.version>2.7.9</springboot.version>
+		<spring.version>5.3.25</spring.version> <!-- inherited! -->
 		<springdoc.version>1.6.14</springdoc.version>
-		<swagger.version>2.2.7</swagger.version>
+		<swagger.version>2.2.8</swagger.version>
 		<jackson.version>2.14.2</jackson.version>
 	</properties>
 
@@ -32,11 +39,23 @@
 				<artifactId>spring-boot-starter-web</artifactId>
 				<version>${springboot.version}</version>
 			</dependency>
-      <dependency>
-        <groupId>io.swagger.core.v3</groupId>
-        <artifactId>swagger-annotations</artifactId>
-        <version>${swagger.version}</version>
-      </dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>1.0.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.swagger.core.v3</groupId>
+				<artifactId>swagger-annotations</artifactId>
+				<version>${swagger.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>io.swagger.core.v3</groupId>
 				<artifactId>swagger-models</artifactId>
@@ -72,6 +91,12 @@
 				<version>${project.version}</version>
 				<type>pom</type>
 			</dependency>
+			<dependency>
+				<artifactId>spring-data-support</artifactId>
+				<groupId>com.github.ympavlov.study.eventproc</groupId>
+				<version>${project.version}</version>
+				<type>pom</type>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -94,51 +119,39 @@
 					</configuration>
 				</plugin>
 
-        <plugin>
-          <groupId>org.openapitools</groupId>
-          <artifactId>openapi-generator-maven-plugin</artifactId>
-          <version>6.5.0</version>
+				<plugin>
+					<groupId>org.openapitools</groupId>
+					<artifactId>openapi-generator-maven-plugin</artifactId>
+					<version>6.6.0</version>
 
-          <configuration>
-            <generatorName>spring</generatorName>
+					<configuration>
+						<generatorName>spring</generatorName>
 
-            <!--suppress UnresolvedMavenProperty - defined in submodules -->
-            <modelPackage>${mainPackage}.model</modelPackage>
-            <!--suppress UnresolvedMavenProperty - defined in submodules -->
-            <apiPackage>${mainPackage}.api</apiPackage>
-            <withXml>true</withXml>
+						<!--suppress UnresolvedMavenProperty - defined in submodules -->
+						<modelPackage>${mainPackage}.api.model</modelPackage>
+						<!--suppress UnresolvedMavenProperty - defined in submodules -->
+						<apiPackage>${mainPackage}.api.controller</apiPackage>
+						<withXml>true</withXml>
 
-            <configOptions>
-              <enablePostProcessFile>false</enablePostProcessFile>
-              <groupId>${project.groupId}</groupId>
-              <artifactId>${project.artifactId}</artifactId>
-              <artifactVersion>${project.version}</artifactVersion>
-              <!--suppress UnresolvedMavenProperty - defined in submodules -->
-              <basePackage>${mainPackage}</basePackage>
-              <!--suppress UnresolvedMavenProperty - defined in submodules -->
-              <configPackage>${mainPackage}.config</configPackage>
+						<configOptions>
+							<enablePostProcessFile>false</enablePostProcessFile>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<artifactVersion>${project.version}</artifactVersion>
+							<!--suppress UnresolvedMavenProperty - defined in submodules -->
+							<basePackage>${mainPackage}.api</basePackage>
+							<!--suppress UnresolvedMavenProperty - defined in submodules -->
+							<configPackage>${mainPackage}.api.config</configPackage>
 
-              <delegatePattern>true</delegatePattern>
+							<delegatePattern>true</delegatePattern>
 
-              <generateSupportingFiles>false</generateSupportingFiles>
-              <apiTests>false</apiTests>
-              <modelTests>true</modelTests>
-              <interfaceOnly>false</interfaceOnly>
-            </configOptions>
-          </configuration>
-	        <executions>
-		        <execution>
-			        <id>generate-api</id>
-			        <goals>
-				        <goal>generate</goal>
-			        </goals>
-			        <configuration>
-				        <!--suppress UnresolvedMavenProperty -->
-				        <inputSpec>${apiSpec}</inputSpec>
-			        </configuration>
-		        </execution>
-	        </executions>
-        </plugin>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<apiTests>false</apiTests>
+							<modelTests>true</modelTests>
+							<interfaceOnly>false</interfaceOnly>
+						</configOptions>
+					</configuration>
+				</plugin>
 
 				<plugin>
 					<groupId>org.springframework.boot</groupId>

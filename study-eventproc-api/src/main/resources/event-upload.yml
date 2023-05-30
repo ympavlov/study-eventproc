@@ -1,12 +1,12 @@
 openapi: 3.0.3
 servers:
-  - url: /upload/v1
+  - url: /v1
 info:
   version: "1.0.0"
   title: Event uploading API
 
 paths:
-  /:
+  /upload:
     post:
       summary: upload events
       operationId: uploadEvents

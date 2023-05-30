@@ -1,6 +1,6 @@
 openapi: 3.0.3
 servers:
-  - url: /ui/v1
+  - url: /v1
 info:
   version: "1.0.0"
   title: Frontend API
@@ -34,19 +34,6 @@ paths:
             application/json:
               schema:
                 $ref: "EventList.yml#/definitions/Item"
-  /item/{itemId}/events:
-    get:
-      summary: get all item's events
-      operationId: getItemEvents
-      parameters:
-        - $ref: "#/components/parameters/itemId"
-      responses:
-        200:
-          description: item's events
-          content:
-            application/json:
-              schema:
-                $ref: "EventList.yml"
   /location:
     get:
       summary: get all locations
@@ -66,7 +53,7 @@ paths:
           - $ref: "#/components/parameters/locationId"
       responses:
         200:
-          description: list of locations
+          description: location info
           content:
             application/json:
               schema:
