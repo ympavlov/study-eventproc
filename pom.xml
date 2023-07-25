@@ -14,7 +14,7 @@
 	</scm>
 
 	<modules>
-		<!--module>study-eventproc-openapi</module-->
+		<!--module>study-eventproc-api</module-->
 		<module>study-eventproc-gateway</module>
 		<module>study-eventproc-event-service</module>
 		<module>study-eventproc-dict-service</module>
@@ -37,6 +37,11 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-validation</artifactId>
 				<version>${springboot.version}</version>
 			</dependency>
 			<dependency>
@@ -128,9 +133,9 @@
 						<generatorName>spring</generatorName>
 
 						<!--suppress UnresolvedMavenProperty - defined in submodules -->
-						<modelPackage>${mainPackage}.api.model</modelPackage>
+						<modelPackage>${mainPackage}.dto</modelPackage>
 						<!--suppress UnresolvedMavenProperty - defined in submodules -->
-						<apiPackage>${mainPackage}.api.controller</apiPackage>
+						<apiPackage>${mainPackage}.controller</apiPackage>
 						<withXml>true</withXml>
 
 						<configOptions>
@@ -139,11 +144,13 @@
 							<artifactId>${project.artifactId}</artifactId>
 							<artifactVersion>${project.version}</artifactVersion>
 							<!--suppress UnresolvedMavenProperty - defined in submodules -->
-							<basePackage>${mainPackage}.api</basePackage>
+							<basePackage>${mainPackage}</basePackage>
 							<!--suppress UnresolvedMavenProperty - defined in submodules -->
-							<configPackage>${mainPackage}.api.config</configPackage>
+							<configPackage>${mainPackage}.config</configPackage>
 
 							<delegatePattern>true</delegatePattern>
+
+							<performBeanValidation>true</performBeanValidation>
 
 							<generateSupportingFiles>false</generateSupportingFiles>
 							<apiTests>false</apiTests>

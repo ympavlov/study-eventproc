@@ -1,4 +1,4 @@
-package com.github.ympavlov.study.eventproc.dict.api.controller;
+package com.github.ympavlov.study.eventproc.dict.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
