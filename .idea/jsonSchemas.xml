@@ -12,10 +12,10 @@
               <option name="patterns">
                 <list>
                   <Item>
-                    <option name="path" value="study-event-processor-api/src/main/resources/Location.yml" />
+                    <option name="path" value="study-eventproc-api/src/main/resources/Location.yml" />
                   </Item>
                   <Item>
-                    <option name="path" value="study-event-processor-api/src/main/resources/EventList.yml" />
+                    <option name="path" value="study-eventproc-api/src/main/resources/EventList.yml" />
                   </Item>
                 </list>
               </option>
@@ -30,10 +30,13 @@
               <option name="patterns">
                 <list>
                   <Item>
-                    <option name="path" value="study-event-processor-api/src/main/resources/ui.yml" />
+                    <option name="path" value="study-eventproc-api/src/main/resources/event-upload.yml" />
                   </Item>
                   <Item>
-                    <option name="path" value="study-event-processor-api/src/main/resources/event-upload.yml" />
+                    <option name="path" value="study-eventproc-api/src/main/resources/event-get.yml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="study-eventproc-api/src/main/resources/dict.yml" />
                   </Item>
                 </list>
               </option>

@@ -13,7 +13,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/EventList"
       responses:
-        200:
+        202:
           description: the list of events is accepted, willing to be processed
 
 components:
@@ -23,4 +23,3 @@ components:
         application/json:
           schema:
             $ref: "EventList.yml"
-

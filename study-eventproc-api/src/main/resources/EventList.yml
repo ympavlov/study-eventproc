@@ -1,8 +1,14 @@
 $schema: "http://json-schema.org/draft-04/schema#"
 description: list of events
-type: array
-items:
-  $ref: "#/definitions/Event"
+type: object
+properties:
+  msgId:
+    type: string
+    description: (transiently) unique id of list to track its processing
+  msg:
+    type: array
+    items:
+      $ref: "#/definitions/Event"
 
 definitions:
   Id:
